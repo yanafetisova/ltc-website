@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LTC Tennis Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Левая колонка шире и с лёгким фоном */
+    .container.flex-row {
+      max-width: 1200px;
+      margin: 2rem auto;
+      display: flex;
+      gap: 3rem;
+      padding: 0 1rem;
+    }
+    .flex-col.left-col {
+      flex: 1.3;
+      background: #eaf4e6;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(20, 83, 45, 0.1);
+      min-height: 280px;
+    }
+    .flex-col.right-col {
+      flex: 1;
+    }
+    .responsive {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    /* Быстрые ссылки */
+    .button {
+      display: inline-block;
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      background: #14532d;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .button:hover {
+      background: #0f3e1a;
+    }
+    /* Стили блога */
+    #blog-container article {
+      background: #f9fdf7;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(20, 83, 45, 0.1);
+      margin-bottom: 1.5rem;
+    }
+    #blog-container h4 {
+      color: #14532d;
+      margin-bottom: 0.3rem;
+    }
+    #blog-container small {
+      color: #555;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+    #blog-container p {
+      line-height: 1.5;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Club Logo" />
+      </div>
+      <nav>
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="membership.html" class="nav-link">Membership</a>
+        <a href="programs.html" class="nav-link">Programs</a>
+
+        <div class="dropdown">
+          <a href="events.html" class="nav-link dropdown-toggle">
+            Events
+            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.188l3.71-3.957a.75.75 0 111.08 1.04l-4.25 4.53a.75.75 0 01-1.08 0l-4.25-4.53a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="tournaments.html" class="dropdown-item">Tournaments</a>
+            <a href="boxleague.html" class="dropdown-item">Box League</a>
+            <a href="eventcalendar.html" class="dropdown-item">Event Calendar</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <a href="clubinfo.html" class="nav-link dropdown-toggle">
+            Club Info
+            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.188l3.71-3.957a.75.75 0 111.08 1.04l-4.25 4.53a.75.75 0 01-1.08 0l-4.25-4.53a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="clubinfo.html" class="dropdown-item">About Us</a>
+            <a href="https://www.customclothingstore.ca/online-store/Lethbridge-Tennis-Club-c151802544"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="dropdown-item">
+              Official LTC Clothing
+            </a>
+            <a href="contact.html" class="dropdown-item">Contact Us</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container flex-row" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <div class="flex-col left-col">
+      <h2>Welcome to Lethbridge Tennis Club!</h2>
+      <p>
+        We are located at 2611 Parkside Drive South, just east of Spitz Stadium. Parking is available via 6 Ave. S. at 25 Street S.
+      </p>
+      <p>
+        LTC has 6 tennis courts, coaching for all levels, and social events. Everyone is welcome, from beginners to experienced players.
+      </p>
+      <p>
+        Come play tennis or join our community events.
+      </p>
+    </div>
+    <div class="flex-col right-col">
+      <img class="responsive" src="images/mainpic.jpg" alt="Club Photo" />
+    </div>
+  </section>
+
+  <section class="container flex-row" style="padding-bottom: 4rem;">
+    <div class="flex-col" style="flex: 1;">
+      <h3>Quick Links</h3>
+      <a href="eventcalendar.html" class="button">Event Calendar</a><br />
+      <a href="tournaments.html" class="button">Tournaments</a>
+    </div>
+    <div class="flex-col" style="flex: 2;">
+      <h3>Club Blog</h3>
+      <div id="blog-container">
+        <p>Loading posts...</p>
+      </div>
+    </div>
+  </section>
+
+<footer>
+  <div class="footer-container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 3px solid #14532d;">
+    <div class="footer-left" style="display: flex; flex-direction: column; justify-content: center; gap: 0.5rem;">
+      <p style="margin: 0; font-weight: bold; font-size: 1.2rem; color: #a5d6a7;">Lethbridge Tennis Club</p>
+      <address style="font-size: 1rem; line-height: 1.4; color: #c8e6c9; margin: 0;">
+        2611 Parkside Dr S, Lethbridge, AB T1J 1C7<br />
+        Email: <a href="mailto:lethtennisclub@gmail.com" style="color: #c8e6c9; text-decoration: underline;">lethtennisclub@gmail.com</a><br />
+        Phone: <a href="tel:+14033274673" style="color: #c8e6c9; text-decoration: underline;">(403) 327-4673</a>
+      </address>
+      <p style="margin: 0; font-size: 1.1rem;">
+        <a href="https://www.facebook.com/groups/27098917284/" target="_blank" rel="noopener noreferrer"
+          style="color: #c8e6c9; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#c8e6c9" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M22.675 0h-21.35C.597 0 0 .598 0 1.333v21.333C0 23.402.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24h-1.918c-1.505 0-1.796.715-1.796 1.763v2.312h3.59l-.467 3.622h-3.123V24h6.116c.728 0 1.324-.598 1.324-1.333V1.333C24 .598 23.403 0 22.675 0z"/>
+          </svg>
+          Facebook Group
+        </a>
+      </p>
+    </div>
+    <div class="footer-right" style="flex: 1; margin-left: 2rem;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2614.3871549932996!2d-112.8044901!3d49.6907281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x536e865192eb8039%3A0x918d8a8583593869!2sLethbridge%20Tennis%20Club!5e0!3m2!1sen!2sca!4v1720898982070!5m2!1sen!2sca"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Lethbridge Tennis Club Location Map"
+        style="border:0; width:100%; height:200px; border-radius:8px;">
+      </iframe>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5iFrQ4uprmeVeJCyKMiTDXk2T_k1sv4I",
+      authDomain: "ltc-website-8a884.firebaseapp.com",
+      projectId: "ltc-website-8a884",
+      storageBucket: "ltc-website-8a884.appspot.com",
+      messagingSenderId: "1059988013295",
+      appId: "1:1059988013295:web:505d59225c70675247db1a"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadBlogPosts() {
+      const blogContainer = document.getElementById("blog-container");
+      blogContainer.innerHTML = "<p>Loading posts...</p>";
+
+      try {
+        const blogRef = collection(db, "blogPosts");
+        const q = query(blogRef, orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+          blogContainer.innerHTML = "<p>No posts found.</p>";
+          return;
+        }
+
+        blogContainer.innerHTML = "";
+
+        querySnapshot.forEach((doc) => {
+          const post = doc.data();
+
+          const article = document.createElement("article");
+          article.style.marginBottom = "2rem";
+
+          const title = document.createElement("h4");
+          title.textContent = post.title || "Untitled";
+
+          const date = document.createElement("small");
+          if(post.createdAt && post.createdAt.toDate) {
+            const d = post.createdAt.toDate();
+            date.textContent = d.toLocaleDateString(undefined, {year: 'numeric', month: 'long', day: 'numeric'});
+          }
+          date.style.display = "block";
+          date.style.marginBottom = "0.5rem";
+          date.style.color = "#555";
+
+          const content = document.createElement("p");
+          content.textContent = post.content || "";
+
+          article.appendChild(title);
+          article.appendChild(date);
+          article.appendChild(content);
+
+          blogContainer.appendChild(article);
+        });
+
+      } catch (error) {
+        console.error("Error loading blog posts:", error);
+        blogContainer.innerHTML = "<p>Error loading posts.</p>";
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", loadBlogPosts);
+  </script>
+
+</body>
+</html>
