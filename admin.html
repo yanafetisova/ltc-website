@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel | LTC Tennis Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Lora', serif; padding: 2rem; background: #f4f9f0; }
+    form { margin-bottom: 2rem; max-width: 600px; }
+    label { display: block; margin: 0.5rem 0 0.2rem; }
+    input, textarea { width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; }
+    button { margin-top: 1rem; background: #14532d; color: white; border: none; padding: 0.7rem 1.2rem; border-radius: 6px; cursor: pointer; }
+    button:hover:not(:disabled) { background: #0f3e1a; }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+    .post-list { max-width: 600px; }
+    .post-item { padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(20, 83, 45, 0.1); margin-bottom: 1rem; }
+    .post-item h4 { margin: 0 0 0.5rem; color: #14532d; }
+    .post-actions button { margin-right: 0.5rem; }
+    #delete-old-posts { background: #9b2c2c; margin-bottom: 2rem; }
+    #delete-old-posts:hover { background: #6b1a1a; }
+  </style>
+</head>
+<body>
+
+  <h1>Admin Panel — Blog Posts</h1>
+
+  <form id="post-form">
+    <label for="title">Title</label>
+    <input type="text" id="title" required />
+    <label for="content">Content</label>
+    <textarea id="content" rows="6" required></textarea>
+    <button type="submit">Add Post</button>
+  </form>
+
+  <button id="delete-old-posts">Delete All Posts Older Than 3 Months</button>
+
+  <section class="post-list" id="posts-container">
+    <!-- Список постов появится здесь -->
+  </section>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      serverTimestamp,
+      query,
+      orderBy,
+      getDocs,
+      doc,
+      deleteDoc,
+      writeBatch
+    } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5iFrQ4uprmeVeJCyKMiTDXk2T_k1sv4I",
+      authDomain: "ltc-website-8a884.firebaseapp.com",
+      projectId: "ltc-website-8a884",
+      storageBucket: "ltc-website-8a884.appspot.com",
+      messagingSenderId: "1059988013295",
+      appId: "1:1059988013295:web:505d59225c70675247db1a"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const postForm = document.getElementById('post-form');
+    const postsContainer = document.getElementById('posts-container');
+    const deleteOldPostsBtn = document.getElementById('delete-old-posts');
+
+    postForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value.trim();
+      const content = document.getElementById('content').value.trim();
+
+      if (!title || !content) return alert("Please fill out all fields.");
+
+      try {
+        await addDoc(collection(db, 'blogPosts'), {
+          title,
+          content,
+          createdAt: serverTimestamp()
+        });
+        postForm.reset();
+        loadPosts();
+      } catch (error) {
+        alert("Error adding post: " + error.message);
+      }
+    });
+
+    async function loadPosts() {
+      postsContainer.innerHTML = '';
+      const q = query(collection(db, 'blogPosts'), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+
+      snapshot.forEach(docSnap => {
+        const post = docSnap.data();
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post-item';
+
+        let postDate = post.createdAt ? post.createdAt.toDate() : null;
+
+        postDiv.innerHTML = `
+          <h4>${post.title}</h4>
+          <p>${post.content}</p>
+          <p><small>Created: ${postDate ? postDate.toLocaleDateString() : 'Unknown'}</small></p>
+          <div class="post-actions">
+            <button onclick="deletePost('${docSnap.id}')">Delete</button>
+          </div>
+        `;
+
+        postsContainer.appendChild(postDiv);
+      });
+    }
+
+    window.deletePost = async function(id) {
+      if (!confirm('Are you sure you want to delete this post?')) return;
+      try {
+        await deleteDoc(doc(db, 'blogPosts', id));
+        loadPosts();
+      } catch (error) {
+        alert("Error deleting post: " + error.message);
+      }
+    };
+
+    deleteOldPostsBtn.addEventListener('click', async () => {
+      if (!confirm('Are you sure you want to delete ALL posts older than 3 months? This action cannot be undone.')) return;
+
+      try {
+        const now = new Date();
+        const threeMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 3, now.getDate());
+
+        const snapshot = await getDocs(collection(db, 'blogPosts'));
+        const batch = writeBatch(db);
+        let deleteCount = 0;
+
+        snapshot.forEach(docSnap => {
+          const post = docSnap.data();
+          const postDate = post.createdAt ? post.createdAt.toDate() : null;
+          if (postDate && postDate <= threeMonthsAgo) {
+            batch.delete(docSnap.ref);
+            deleteCount++;
+          }
+        });
+
+        if (deleteCount === 0) {
+          alert("No posts older than 3 months to delete.");
+          return;
+        }
+
+        await batch.commit();
+        alert(`${deleteCount} post(s) deleted.`);
+        loadPosts();
+
+      } catch (error) {
+        alert("Error deleting old posts: " + error.message);
+      }
+    });
+
+    loadPosts();
+  </script>
+
+</body>
+</html>
