@@ -1,0 +1,900 @@
+/* Общие базовые стили */
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+
+body {
+  font-family: 'Lora', serif;
+  background-color: white;
+  color: #14532d;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Хедер */
+header {
+  background-color: #0b3d1a;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+header .logo-container img {
+  width: 180px;
+  border-radius: 50%;
+}
+
+nav a {
+  color: #dbe7cf;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1.125rem;
+  transition: color 0.3s ease;
+}
+
+nav a.active,
+nav a:hover {
+  color: #f5f9e3;
+  font-weight: 700;
+  border-bottom: 2px solid #f5f9e3;
+}
+
+/* Основной контейнер */
+.container {
+  max-width: 1100px;
+  margin: 2rem auto 4rem;
+  padding: 0 1rem;
+}
+
+/* Заголовки */
+h1, h2, h3, h4 {
+  color: #0b3d1a;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Параграфы */
+p {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+/* Специальный параграф */
+p.intro {
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.4;
+}
+
+/* Группировка программ */
+.program-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.program-card {
+  background-color: #f3f8f3;
+  border: 2px solid #14532d;
+  border-radius: 12px;
+  padding: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+  font-size: 1rem;
+  /* height: 180px; */      /* закомментировать или убрать */
+  min-height: 180px;       /* заменить на минимальную высоту */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #14532d;
+}
+
+.program-card h3 {
+  font-size: 1.1rem;
+}
+
+.program-card a {
+  color: #14532d;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.program-card a:hover {
+  color: #0b3d1a;
+  text-decoration: underline;
+}
+
+/* Private lessons section */
+.private-programs {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.private-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.private-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.private-card {
+  background-color: #eef4eb;
+  border: 2px solid #14532d;
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+  color: #14532d;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+}
+
+.private-card h4 {
+  font-size: 1.1rem;
+}
+
+.private-card a {
+  background-color: #14532d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.private-card a:hover {
+  background-color: #0b3d1a;
+}
+
+/* Responsive Programs grid */
+@media (max-width: 1024px) {
+  .program-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .private-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .program-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Стили для главной страницы === */
+
+.flex-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.flex-col {
+  flex: 1 1 300px;
+  min-width: 280px;
+  box-sizing: border-box;
+}
+
+.responsive {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+}
+
+/* Кнопки на главной странице */
+.button {
+  display: inline-block;
+  background-color: #14532d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0b3d1a;
+}
+
+/* Footer */
+footer {
+  background-color: #0b3d1a;
+  color: #dbe7cf;
+  padding: 1rem 0;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+.footer-left p, 
+.footer-right iframe {
+  margin: 0 0 0.5rem 0;
+}
+
+/* Адаптивность footer */
+@media (max-width: 700px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  .footer-right iframe {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+body {
+  font-family: 'Lora', serif;
+}
+
+main.container {
+  max-width: 900px;
+  margin: 3rem auto;
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+/* Membership Page Styles */
+.membership-price {
+  flex: 1 1 40%;
+  min-width: 280px;
+}
+
+.membership-price h2 {
+  color: #14532d;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.membership-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.membership-table th,
+.membership-table td {
+  border: 1px solid #14532d;
+  padding: 0.75rem 1rem;
+  font-size: 1.125rem;
+  color: #14532d;
+}
+
+.membership-table th {
+  background-color: #dbe7cf;
+  font-weight: 700;
+}
+
+.membership-table tbody tr:nth-child(even) {
+  background-color: #f5f9e3;
+}
+
+.payment-info {
+  flex: 1 1 50%;
+  min-width: 280px;
+  background-color: #e6f0d9;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: #14532d;
+  line-height: 1.6;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+}
+
+.payment-info h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #0b3d1a;
+  text-align: center;
+  font-weight: 700;
+}
+
+.payment-info a {
+  color: #14532d;
+  text-decoration: underline;
+}
+
+.payment-info ol {
+  padding-left: 1.4rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
+footer {
+  background-color: #0b3d1a;
+  color: #dbe7cf;
+  padding: 1rem 0;
+  margin-top: 4rem;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+.footer-left p {
+  margin: 0 0 0.5rem 0;
+}
+
+.footer-right iframe {
+  width: 300px;
+  height: 200px;
+  border: 0;
+  border-radius: 8px;
+  margin: 0 0 0.5rem 0;
+}
+
+/* Адаптивность footer */
+@media (max-width: 700px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  .footer-right iframe {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+footer, 
+footer p, 
+footer address {
+  font-style: normal; /* убираем курсив */
+  color: #dbe7cf;     /* светлый текст */
+}
+
+footer a {
+  color: #a3d9a5;          /* приятный зелёный оттенок для ссылок */
+  text-decoration: none;   /* убрать подчёркивание */
+  font-style: normal;      /* убрать курсив */
+  transition: color 0.3s ease;
+}
+
+footer a:hover,
+footer a:focus {
+  color: #e0f1df;          /* светлее при наведении */
+  text-decoration: underline;
+}
+
+
+.email-button {
+  display: inline-block;
+  background-color: #14532d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+.email-button:hover {
+  background-color: #0b3d1a;
+}
+
+.email-reveal {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 1rem;
+}
+
+.toggle-email:checked + .email-button + .email-reveal {
+  max-height: 100px; /* или auto, но тогда без анимации */
+  padding: 0.5rem 1rem;
+}
+
+nav {
+  position: relative;
+}
+
+nav a.nav-link {
+  color: #dbe7cf;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1.125rem;
+  transition: color 0.3s ease;
+}
+
+nav a.nav-link.active,
+nav a.nav-link:hover {
+  color: #f5f9e3;
+  font-weight: 700;
+  border-bottom: 2px solid #f5f9e3;
+}
+
+
+/* === Dropdown меню и подменю === */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.dropdown-arrow {
+  width: 0.8em;
+  height: 0.8em;
+  transition: transform 0.3s ease;
+}
+
+/* При наведении поворачиваем стрелочку */
+.dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Меню */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #0b3d1a;
+  border: 1px solid #14532d;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  top: 100%;
+  left: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Пункты меню */
+.dropdown-menu a,
+.dropdown-item {
+  position: relative;
+  display: block;
+  padding: 0.5rem 1rem 0.5rem 1.5rem; /* отступ слева для кружочка */
+  color: #dbe7cf;
+  text-decoration: none !important;
+  border: none !important;
+  background: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 400;
+}
+
+.dropdown-menu a:hover,
+.dropdown-item:hover {
+  background-color: #14532d;
+  color: #f5f9e3;
+  text-decoration: none !important;
+  border: none !important;
+}
+
+/* Кружочек при наведении */
+.dropdown-menu a:hover::before,
+.dropdown-item:hover::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #f5f9e3;
+  border-radius: 50%;
+}
+
+
+.private-lessons-section {
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.lesson-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  align-items: flex-start;
+}
+
+.lesson-pricing {
+  flex: 1 1 300px;
+  background-color: #eef4eb;
+  border: 2px solid #14532d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+}
+
+.lesson-pricing h3 {
+  color: #0b3d1a;
+  margin-top: 0;
+}
+
+.lesson-pricing ul {
+  list-style-type: disc;
+  padding-left: 1.2rem;
+  margin: 0;
+}
+
+.lesson-pricing li {
+  margin-bottom: 0.5rem;
+  color: #14532d;
+}
+
+.lesson-card {
+  flex: 1 1 300px;
+  background-color: #f3f8f3;
+  border: 2px solid #14532d;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+  color: #14532d;
+}
+
+.lesson-card h4 {
+  margin-top: 0;
+  color: #0b3d1a;
+}
+
+.link-button {
+  display: inline-block;
+  background-color: #14532d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.link-button:hover {
+  background-color: #0b3d1a;
+}
+
+@media (max-width: 768px) {
+  .lesson-row {
+    flex-direction: column;
+  }
+}
+
+.facility-row {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.facility-image {
+  flex: 1 1 300px;
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+  object-fit: cover;
+}
+
+.facility-text {
+  flex: 2 1 500px;
+  font-size: 1.1rem;
+  color: #14532d;
+  line-height: 1.5;
+}
+
+.board-row {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  flex-wrap: nowrap; /* запретить перенос */
+}
+
+.board-list {
+  flex: 0 0 60%; /* фиксировать ширину около 60% */
+  font-size: 1.1rem;
+  color: #14532d;
+}
+
+.board-image {
+  flex: 0 0 35%; /* фиксировать ширину около 35% */
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+  object-fit: cover;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .board-row {
+    flex-wrap: wrap; /* на мобильных разрешить перенос */
+  }
+  .board-list, .board-image {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .facility-row, .board-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .facility-image, .board-image, .facility-text, .board-list {
+    max-width: 100%;
+    flex: unset;
+  }
+}
+
+.contact-container {
+  max-width: 900px;
+  margin: 3rem auto;
+}
+
+.contact-row {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.contact-info {
+  flex: 1 1 40%;
+  min-width: 280px;
+  color: #14532d;
+  font-size: 1.1rem;
+}
+
+.contact-info a {
+  color: #14532d;
+  text-decoration: underline;
+}
+
+.contact-info h2 {
+  margin-top: 1rem;
+  color: #0b3d1a;
+}
+
+.contact-info ul {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+  list-style-type: disc;
+}
+
+.contact-info li {
+  margin-bottom: 0.5rem;
+}
+
+.contact-form-section {
+  flex: 1 1 50%;
+  min-width: 280px;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #0b3d1a;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  margin-bottom: 1rem;
+  border: 2px solid #14532d;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Lora', serif;
+  box-sizing: border-box;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form .button {
+  width: 100%;
+  background-color: #14532d;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form .button:hover {
+  background-color: #0b3d1a;
+}
+
+/* Стили для страницы Event Calendar */
+
+body {
+  background-color: #f0f6ec; /* мягкий зелёный фон */
+  color: #14532d; /* насыщенный зелёный текст */
+  font-family: 'Lora', serif;
+}
+
+h2 {
+  color: #0b3d1a;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.weekly-events {
+  max-width: 920px; /* равна ширине календаря + отступы */
+  margin: 2rem auto 1rem auto; /* центрируем и добавляем отступ сверху и снизу */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 0 1rem; /* немного внутреннего отступа */
+}
+
+.event-card {
+  background-color: #f3f8f3;
+  border: 2px solid #14532d;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
+  color: #14532d;
+  font-family: 'Lora', serif;
+  box-sizing: border-box;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.event-card h3 {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.event-card h4 {
+  font-weight: 600;
+  color: #2a6b2f;
+  margin: 0 0 0.5rem 0;
+}
+
+.event-card p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.event-card a {
+  color: #14532d;
+  text-decoration: underline;
+}
+
+/* Адаптив */
+@media (max-width: 1024px) {
+  .weekly-events {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .weekly-events {
+    grid-template-columns: 1fr;
+  }
+}
+
+.past-results-button {
+  display: inline-block;
+  background-color: #14532d;  /* темно-зеленый фон */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.past-results-button:hover {
+  background-color: #0b3d1a;  /* более темный оттенок при наведении */
+}
+
+.next-tournament {
+  margin-bottom: 3rem; /* или любое другое значение, например 40px */
+}
+
+#blog-container {
+  background: #f9fcef; /* очень светлый зеленоватый */
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(20, 83, 45, 0.2);
+  padding: 1.5rem;
+  max-height: 400px; /* фиксируем высоту */
+  overflow-y: auto; /* включаем вертикальный скролл */
+  font-family: 'Lora', serif;
+  color: #1e3a1a;
+}
+
+#blog-container article {
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid #d7e3c8;
+  padding-bottom: 1rem;
+}
+
+#blog-container article:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#blog-container h4 {
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  color: #14532d;
+}
+
+#blog-container small {
+  color: #567d46;
+  font-style: italic;
+}
+
+#blog-container p {
+  line-height: 1.5;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+}
