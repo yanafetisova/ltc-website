@@ -31,12 +31,7 @@ nav a {
   transition: color 0.3s ease;
 }
 
-nav a.active,
-nav a:hover {
-  color: #f5f9e3;
-  font-weight: 700;
-  border-bottom: 2px solid #f5f9e3;
-}
+
 
 /* Основной контейнер */
 .container {
