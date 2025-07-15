@@ -5,153 +5,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Past Tournaments Results | LTC Tennis Club</title>
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    body {
-      font-family: 'Lora', serif;
-      background-color: #f9fef7;
-      margin: 0;
-      color: #0b3d1a;
-      padding: 1rem;
+    /* Minimal local tweaks, main styles in styles.css */
+    main.container {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
       max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1 {
-      text-align: center;
+      margin: 0 auto;
       color: #14532d;
+    }
+    main.container h2 {
       margin-bottom: 1rem;
-    }
-    ul.tournament-list {
-      list-style: none;
-      padding-left: 0;
-    }
-    li.tournament-item {
-      background-color: #e6f0d9;
-      border: 2px solid #14532d;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      padding: 1rem 1.5rem;
-      box-shadow: 0 3px 7px rgba(20, 83, 45, 0.2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .tournament-details {
-      max-width: 70%;
-    }
-    .tournament-details h2 {
-      margin: 0 0 0.3rem 0;
-    }
-    .tournament-details p {
-      margin: 0.2rem 0;
-    }
-    .results-link {
-      background-color: #14532d;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 14px;
-      text-decoration: none;
       font-weight: 700;
-      flex-shrink: 0;
+      font-size: 2rem;
+      text-align: center;
     }
-    .results-link:hover {
-      background-color: #0b3d1a;
-    }
-    footer {
-      background-color: #14532d;
-      color: #c8e6c9;
-      padding: 1.5rem 2rem;
-      margin-top: 3rem;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    footer .footer-left,
-    footer .footer-right {
-      flex: 1 1 300px;
-    }
-    footer a {
-      color: #c8e6c9;
-      text-decoration: underline;
-    }
-    footer address {
-      font-style: normal;
-      line-height: 1.4;
+    main.container p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
     }
   </style>
+</head>
+<body>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <header>
+    <div class="header-inner">
+      <div class="logo-container">
+        <img src="images/logo.png" alt="Club Logo" />
+      </div>
+      <nav>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="membership.html" class="nav-link">Membership</a>
+        <a href="programs.html" class="nav-link">Programs</a>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyD5iFrQ4uprmeVeJCyKMiTDXk2T_k1sv4I",
-      authDomain: "ltc-website-8a884.firebaseapp.com",
-      projectId: "ltc-website-8a884",
-      storageBucket: "ltc-website-8a884.firebasestorage.app",
-      messagingSenderId: "1059988013295",
-      appId: "1:1059988013295:web:505d59225c70675247db1a"
-    };
+        <div class="dropdown">
+          <a href="events.html" class="nav-link dropdown-toggle">
+            Events
+            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.188l3.71-3.957a.75.75 0 111.08 1.04l-4.25 4.53a.75.75 0 01-1.08 0l-4.25-4.53a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="tournaments.html" class="dropdown-item">Tournaments</a>
+            <a href="boxleague.html" class="dropdown-item">Box League</a>
+            <a href="eventcalendar.html" class="dropdown-item">Event Calendar</a>
+          </div>
+        </div>
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+        <div class="dropdown">
+          <a href="clubinfo.html" class="nav-link dropdown-toggle">
+            About Us
+            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.188l3.71-3.957a.75.75 0 111.08 1.04l-4.25 4.53a.75.75 0 01-1.08 0l-4.25-4.53a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            <a href="https://www.customclothingstore.ca/online-store/Lethbridge-Tennis-Club-c151802544" target="_blank" rel="noopener" class="dropdown-item">Official LTC Clothing</a>
+            <a href="contact.html" class="dropdown-item">Contact Us</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-    function renderPastTournaments(tournaments) {
-      const list = document.getElementById('past-tournaments-list');
-      list.innerHTML = '';
+  <main class="container">
+    <h2>Past Tournaments Results</h2>
+    <p>
+      This page will showcase the results and highlights from our past tournaments.
+      We will update it regularly with detailed information. Stay tuned!
+    </p>
+  </main>
 
-      if (tournaments.length === 0) {
-        list.innerHTML = '<p>No past tournaments found.</p>';
-        return;
-      }
+  <footer>
+    <div class="footer-container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-top: 3px solid #14532d;">
+      <div class="footer-left" style="display: flex; flex-direction: column; justify-content: center; gap: 0.5rem;">
+        <p style="margin: 0; font-weight: bold; font-size: 1.2rem; color: #a5d6a7;">Lethbridge Tennis Club</p>
+        <address style="font-size: 1rem; line-height: 1.4; color: #c8e6c9; margin: 0;">
+          2611 Parkside Dr S, Lethbridge, AB T1J 1C7<br />
+          Email: <a href="mailto:lethtennisclub@gmail.com" style="color: #c8e6c9; text-decoration: underline;">lethtennisclub@gmail.com</a><br />
+          Phone: <a href="tel:+14033274673" style="color: #c8e6c9; text-decoration: underline;">(403) 327-4673</a>
+        </address>
+        <p style="margin: 0; font-size: 1.1rem;">
+          <a href="https://www.facebook.com/groups/27098917284/" target="_blank" rel="noopener noreferrer"
+            style="color: #c8e6c9; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#c8e6c9" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <path d="M22.675 0h-21.35C.597 0 0 .598 0 1.333v21.333C0 23.402.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24h-1.918c-1.505 0-1.796.715-1.796 1.763v2.312h3.59l-.467 3.622h-3.123V24h6.116c.728 0 1.324-.598 1.324-1.333V1.333C24 .598 23.403 0 22.675 0z"/>
+            </svg>
+            Facebook Group
+          </a>
+        </p>
+      </div>
+      <div class="footer-right" style="flex: 1; margin-left: 2rem;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2614.3871549932996!2d-112.8044901!3d49.6907281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x536e865192eb8039%3A0x918d8a8583593869!2sLethbridge%20Tennis%20Club!5e0!3m2!1sen!2sca!4v1720898982070!5m2!1sen!2sca"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lethbridge Tennis Club Location Map"
+          style="border:0; width:100%; height:200px; border-radius:8px;">
+        </iframe>
+      </div>
+    </div>
+  </footer>
 
-      tournaments.forEach(tournament => {
-        const li = document.createElement('li');
-        li.className = 'tournament-item';
-
-        const detailsDiv = document.createElement('div');
-        detailsDiv.className = 'tournament-details';
-
-        const title = document.createElement('h2');
-        title.textContent = tournament.name || 'Unnamed Tournament';
-
-        const dates = document.createElement('p');
-        dates.textContent = 'Dates: ' + (tournament.dates || '—');
-
-        detailsDiv.appendChild(title);
-        detailsDiv.appendChild(dates);
-
-        li.appendChild(detailsDiv);
-
-        if (tournament.resultsUrl) {
-          const resultsLink = document.createElement('a');
-          resultsLink.href = tournament.resultsUrl;
-          resultsLink.target = '_blank';
-          resultsLink.rel = 'noopener noreferrer';
-          resultsLink.className = 'results-link';
-          resultsLink.textContent = 'View Results';
-          li.appendChild(resultsLink);
-        }
-
-        list.appendChild(li);
-      });
-    }
-
-    // Получаем коллекцию pastTournaments из Firestore и сортируем по дате (предположим, есть поле timestamp или даты в поле)
-    db.collection('pastTournaments')
-      .orderBy('date', 'desc')  // если у тебя есть поле date в формате timestamp
-      .get()
-      .then(snapshot => {
-        const tournaments = [];
-        snapshot.forEach(doc => {
-          tournaments.push(doc.data());
-        });
-        renderPastTournaments(tournaments);
-      })
-      .catch(error => {
-        console.error('Error fetching past tournaments:', error);
-        document.getElementById('past-tournaments-list').innerHTML = '<p>Failed to load past tournaments.</p>';
-      });
+</body>
+</html>
