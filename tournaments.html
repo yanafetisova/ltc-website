@@ -92,6 +92,13 @@
 }
 
 </style>
+
+<!-- Firebase App (обязательно) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+
 </head>
 <body>
   <header>
@@ -144,6 +151,7 @@
       <div class="tournament-info">
         <h2>Next Tournament: Summer Open 2025</h2>
         <p class="date">Date: August 15 - August 18, 2025</p>
+        <p class="registration-deadline">Registration deadline: August 12, 2025</p>
       </div>
 
           <div class="draws">
@@ -243,6 +251,57 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Твоя firebase-конфигурация — возьми из консоли Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5iFrQ4uprmeVeJCyKMiTDXk2T_k1sv4I",
+      authDomain: "ltc-website-8a884.firebaseapp.com",
+      projectId: "ltc-website-8a884",
+      storageBucket: "ltc-website-8a884.appspot.com",
+      messagingSenderId: "1059988013295",
+      appId: "1:1059988013295:web:505d59225c70675247db1a"
+    };
+
+  // Инициализация Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+// Format Firestore Timestamp or string into readable date
+function formatDate(dateValue) {
+  if (!dateValue) return "N/A";
+
+  const dateObj = typeof dateValue.toDate === 'function' ? dateValue.toDate() : new Date(dateValue);
+  return dateObj.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+// Load tournament data from Firestore and update the page
+function loadTournament() {
+  db.collection("tournaments").doc("nextTournament").get()
+    .then(doc => {
+      if (doc.exists) {
+        const data = doc.data();
+        document.querySelector('.tournament-info h2').textContent = `Next Tournament: ${data.name}`;
+        document.querySelector('.date').textContent = `Date: ${formatDate(data.startDate)} - ${formatDate(data.endDate)}`;
+        document.querySelector('.registration-deadline').textContent = `Registration deadline: ${formatDate(data.registrationDeadline)}`;
+      } else {
+        console.log("Tournament document not found");
+      }
+    })
+    .catch(error => {
+      console.error("Error loading tournament data:", error);
+    });
+}
+
+// Run after page loads
+window.onload = loadTournament;
+
+
+  // Ждём загрузки страницы и запускаем функцию
+  window.onload = loadTournament;
+</script>
+
+
 
 </body>
 </html>
