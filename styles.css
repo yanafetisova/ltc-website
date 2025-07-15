@@ -893,3 +893,15 @@ h2 {
   font-size: 1rem;
   margin-top: 0.3rem;
 }
+
+.admin-forms-container {
+  display: flex;
+  gap: 2rem; /* расстояние между формами */
+  align-items: flex-start; /* выравнивание по верху */
+  flex-wrap: wrap; /* чтобы на маленьких экранах формы переходили на новую строку */
+}
+
+.blog-form-container, .tournament-form-container {
+  flex: 1 1 45%; /* обе занимают примерно по 45% ширины контейнера */
+  min-width: 300px; /* минимальная ширина для удобства */
+}
