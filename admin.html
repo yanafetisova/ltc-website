@@ -7,37 +7,90 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
   <style>
     body { font-family: 'Lora', serif; padding: 2rem; background: #f4f9f0; }
-    form { margin-bottom: 2rem; max-width: 600px; }
+    .admin-forms-container {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .blog-form-container, .tournament-form-container {
+      flex: 1 1 45%;
+      min-width: 300px;
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(20, 83, 45, 0.1);
+    }
+    form { margin-bottom: 1.5rem; }
     label { display: block; margin: 0.5rem 0 0.2rem; }
-    input, textarea { width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; }
-    button { margin-top: 1rem; background: #14532d; color: white; border: none; padding: 0.7rem 1.2rem; border-radius: 6px; cursor: pointer; }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 1rem;
+      background: #14532d;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
     button:hover:not(:disabled) { background: #0f3e1a; }
     button:disabled { background: #ccc; cursor: not-allowed; }
-    .post-list { max-width: 600px; }
-    .post-item { padding: 1rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(20, 83, 45, 0.1); margin-bottom: 1rem; }
+    .post-list { max-height: 400px; overflow-y: auto; }
+    .post-item {
+      padding: 1rem;
+      background: #e6f0d9;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
     .post-item h4 { margin: 0 0 0.5rem; color: #14532d; }
     .post-actions button { margin-right: 0.5rem; }
-    #delete-old-posts { background: #9b2c2c; margin-bottom: 2rem; }
+    #delete-old-posts {
+      background: #9b2c2c;
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
     #delete-old-posts:hover { background: #6b1a1a; }
   </style>
 </head>
 <body>
+  <h1>Admin Panel</h1>
 
-  <h1>Admin Panel — Blog Posts</h1>
+  <div class="admin-forms-container">
+    <div class="blog-form-container">
+      <h2>Blog Posts</h2>
+      <form id="post-form">
+        <label for="title">Title</label>
+        <input type="text" id="title" required />
+        <label for="content">Content</label>
+        <textarea id="content" rows="6" required></textarea>
+        <button type="submit">Add Post</button>
+      </form>
+      <button id="delete-old-posts">Delete All Posts Older Than 3 Months</button>
+      <section class="post-list" id="posts-container"></section>
+    </div>
 
-  <form id="post-form">
-    <label for="title">Title</label>
-    <input type="text" id="title" required />
-    <label for="content">Content</label>
-    <textarea id="content" rows="6" required></textarea>
-    <button type="submit">Add Post</button>
-  </form>
-
-  <button id="delete-old-posts">Delete All Posts Older Than 3 Months</button>
-
-  <section class="post-list" id="posts-container">
-    <!-- Список постов появится здесь -->
-  </section>
+    <div class="tournament-form-container">
+      <h2>Edit Next Tournament</h2>
+      <form id="tournament-form">
+        <label for="t-name">Tournament Name</label>
+        <input type="text" id="t-name" required />
+        <label for="t-start">Start Date</label>
+        <input type="date" id="t-start" required />
+        <label for="t-end">End Date</label>
+        <input type="date" id="t-end" required />
+        <label for="t-deadline">Registration Deadline</label>
+        <input type="date" id="t-deadline" required />
+        <button type="submit">Save Tournament</button>
+      </form>
+    </div>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
@@ -51,7 +104,9 @@
       getDocs,
       doc,
       deleteDoc,
-      writeBatch
+      writeBatch,
+      setDoc,
+      getDoc
     } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -66,6 +121,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // Blog form elements
     const postForm = document.getElementById('post-form');
     const postsContainer = document.getElementById('posts-container');
     const deleteOldPostsBtn = document.getElementById('delete-old-posts');
@@ -160,7 +216,43 @@
     });
 
     loadPosts();
-  </script>
 
+    // Tournament form elements
+    const tournamentForm = document.getElementById('tournament-form');
+
+    async function loadTournament() {
+      const docRef = doc(db, "tournaments", "nextTournament");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        document.getElementById('t-name').value = data.name || '';
+        document.getElementById('t-start').value = data.startDate || '';
+        document.getElementById('t-end').value = data.endDate || '';
+        document.getElementById('t-deadline').value = data.registrationDeadline || '';
+      }
+    }
+
+    tournamentForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const updatedData = {
+        name: document.getElementById('t-name').value.trim(),
+        startDate: document.getElementById('t-start').value,
+        endDate: document.getElementById('t-end').value,
+        registrationDeadline: document.getElementById('t-deadline').value,
+      };
+
+      try {
+        const docRef = doc(db, "tournaments", "nextTournament");
+        await setDoc(docRef, updatedData, { merge: true });
+        alert('Tournament updated successfully');
+      } catch (error) {
+        alert('Error updating tournament: ' + error.message);
+      }
+    });
+
+    loadTournament();
+  </script>
 </body>
 </html>
