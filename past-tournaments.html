@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Past Tournaments Results | LTC Tennis Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Lora', serif;
+      background-color: #f9fef7;
+      margin: 0;
+      color: #0b3d1a;
+      padding: 1rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #14532d;
+      margin-bottom: 1rem;
+    }
+    ul.tournament-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    li.tournament-item {
+      background-color: #e6f0d9;
+      border: 2px solid #14532d;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 3px 7px rgba(20, 83, 45, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .tournament-details {
+      max-width: 70%;
+    }
+    .tournament-details h2 {
+      margin: 0 0 0.3rem 0;
+    }
+    .tournament-details p {
+      margin: 0.2rem 0;
+    }
+    .results-link {
+      background-color: #14532d;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .results-link:hover {
+      background-color: #0b3d1a;
+    }
+    footer {
+      background-color: #14532d;
+      color: #c8e6c9;
+      padding: 1.5rem 2rem;
+      margin-top: 3rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer .footer-left,
+    footer .footer-right {
+      flex: 1 1 300px;
+    }
+    footer a {
+      color: #c8e6c9;
+      text-decoration: underline;
+    }
+    footer address {
+      font-style: normal;
+      line-height: 1.4;
+    }
+  </style>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5iFrQ4uprmeVeJCyKMiTDXk2T_k1sv4I",
+      authDomain: "ltc-website-8a884.firebaseapp.com",
+      projectId: "ltc-website-8a884",
+      storageBucket: "ltc-website-8a884.firebasestorage.app",
+      messagingSenderId: "1059988013295",
+      appId: "1:1059988013295:web:505d59225c70675247db1a"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function renderPastTournaments(tournaments) {
+      const list = document.getElementById('past-tournaments-list');
+      list.innerHTML = '';
+
+      if (tournaments.length === 0) {
+        list.innerHTML = '<p>No past tournaments found.</p>';
+        return;
+      }
+
+      tournaments.forEach(tournament => {
+        const li = document.createElement('li');
+        li.className = 'tournament-item';
+
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'tournament-details';
+
+        const title = document.createElement('h2');
+        title.textContent = tournament.name || 'Unnamed Tournament';
+
+        const dates = document.createElement('p');
+        dates.textContent = 'Dates: ' + (tournament.dates || '—');
+
+        detailsDiv.appendChild(title);
+        detailsDiv.appendChild(dates);
+
+        li.appendChild(detailsDiv);
+
+        if (tournament.resultsUrl) {
+          const resultsLink = document.createElement('a');
+          resultsLink.href = tournament.resultsUrl;
+          resultsLink.target = '_blank';
+          resultsLink.rel = 'noopener noreferrer';
+          resultsLink.className = 'results-link';
+          resultsLink.textContent = 'View Results';
+          li.appendChild(resultsLink);
+        }
+
+        list.appendChild(li);
+      });
+    }
+
+    // Получаем коллекцию pastTournaments из Firestore и сортируем по дате (предположим, есть поле timestamp или даты в поле)
+    db.collection('pastTournaments')
+      .orderBy('date', 'desc')  // если у тебя есть поле date в формате timestamp
+      .get()
+      .then(snapshot => {
+        const tournaments = [];
+        snapshot.forEach(doc => {
+          tournaments.push(doc.data());
+        });
+        renderPastTournaments(tournaments);
+      })
+      .catch(error => {
+        console.error('Error fetching past tournaments:', error);
+        document.getElementById('past-tournaments-list').innerHTML = '<p>Failed to load past tournaments.</p>';
+      });
