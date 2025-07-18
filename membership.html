@@ -50,9 +50,10 @@
 
   </header>
 
-  <main class="container">
-    <section class="membership-price">
-      <h2>Memberships 2025</h2>
+<main class="container membership-layout">
+  <section class="membership-price">
+    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem;">Memberships <span id="year"></span></h2>
+    <div class="table-wrapper">
       <table class="membership-table" aria-label="Membership prices">
         <thead>
           <tr>
@@ -70,25 +71,27 @@
           <tr><td>Short term</td><td>$10/day, $60/month</td></tr>
         </tbody>
       </table>
-    </section>
+    </div>
+  </section>
 
-    <section class="payment-info">
-      <h3>How to Join &amp; Pay</h3>
-      <p>
-        Ready to become part of our tennis family? Simply send your membership payment via e-transfer to
-        <a href="mailto:lethtennisclub@gmail.com">lethtennisclub@gmail.com</a>.
-      </p>
-      <p><strong>Please include the following details in your transfer note:</strong></p>
-      <ol>
-        <li>Full name of each player you're registering</li>
-        <li>Email address for every registrant</li>
-        <li>Contact phone number for each member</li>
-      </ol>
-      <p>
-        Prefer to pay in person? No problem! Cash or cheque payments are gladly accepted at the club office by our friendly Court Supervisor.
-      </p>
-    </section>
-  </main>
+  <section class="payment-info">
+    <h3>How to Join &amp; Pay</h3>
+    <p>
+      Ready to become part of our tennis family? Simply send your membership payment via e-transfer to
+      <a href="mailto:lethtennisclub@gmail.com">lethtennisclub@gmail.com</a>.
+    </p>
+    <p><strong>Please include the following details in your transfer note:</strong></p>
+    <ol>
+      <li>Full name of each player you're registering</li>
+      <li>Email address for every registrant</li>
+      <li>Contact phone number for each member</li>
+    </ol>
+    <p>
+      Prefer to pay in person? No problem! Cash or cheque payments are gladly accepted at the club office by our friendly Court Supervisor.
+    </p>
+  </section>
+</main>
+
 
 <footer>
   <div class="footer-container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 3px solid #14532d;">
@@ -120,8 +123,17 @@
       </iframe>
     </div>
   </div>
+    <div style="text-align: center; padding: 1rem 0; font-size: 0.9rem; color: #a5d6a7; border-top: 1px solid #14532d;">
+    © <span id="current-year"></span> Lethbridge Tennis Club
+  </div>
 </footer>
 
 
+ <!-- SCRIPTS -->
+
+  <!-- Footer Year -->
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
