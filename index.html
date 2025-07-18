@@ -6,68 +6,48 @@
   <title>LTC Tennis Club</title>
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* Левая колонка шире и с лёгким фоном */
-    .container.flex-row {
-      max-width: 1200px;
-      margin: 2rem auto;
-      display: flex;
-      gap: 3rem;
-      padding: 0 1rem;
-    }
-    .flex-col.left-col {
-      flex: 1.3;
-      background: #eaf4e6;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(20, 83, 45, 0.1);
-      min-height: 280px;
-    }
-    .flex-col.right-col {
-      flex: 1;
-    }
-    .responsive {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    /* Быстрые ссылки */
-    .button {
-      display: inline-block;
-      margin: 0.5rem 0;
-      padding: 0.5rem 1rem;
-      background: #14532d;
-      color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s ease;
-    }
-    .button:hover {
-      background: #0f3e1a;
-    }
-    /* Стили блога */
-    #blog-container article {
-      background: #f9fdf7;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px rgba(20, 83, 45, 0.1);
-      margin-bottom: 1.5rem;
-    }
-    #blog-container h4 {
-      color: #14532d;
-      margin-bottom: 0.3rem;
-    }
-    #blog-container small {
-      color: #555;
-      display: block;
-      margin-bottom: 0.8rem;
-    }
-    #blog-container p {
-      line-height: 1.5;
-      color: #333;
-    }
-  </style>
+
+<style>
+.container.flex-row {
+  max-width: 900px;
+  margin: 2rem auto;
+  display: flex;
+  gap: 3rem;
+  padding: 0 1rem;
+}
+
+/* Left: Description + Links */
+.flex-col.left-col {
+  flex: 1.3;
+  background: none;          /* убираем фон */
+  padding: 2rem;
+  border-radius: 0;          /* убираем скругления */
+  box-shadow: none;          /* убираем тень */
+  min-height: 280px;
+  text-align: left;
+}
+
+/* Центрируем картинку и убираем тень, скругления */
+.centered-img {
+  display: block;
+  margin: 1rem auto;
+  max-width: 80%;
+  border-radius: 0;          /* убрать скругления */
+  box-shadow: none;          /* убрать тень */
+}
+
+/* Right: Blog */
+.flex-col.right-col {
+  flex: 1; /* Меньшая ширина */
+}
+
+/* Blog images or others */
+.responsive {
+  max-width: 100%;
+  border-radius: 0;          /* убрать скругления */
+  box-shadow: none;          /* убрать тень */
+}
+</style>
 </head>
 <body>
 
@@ -112,37 +92,43 @@
     </div>
   </header>
 
-  <section class="container flex-row" style="padding-top: 4rem; padding-bottom: 4rem;">
-    <div class="flex-col left-col">
-      <h2>Welcome to Lethbridge Tennis Club!</h2>
-      <p>
-        We are located at 2611 Parkside Drive South, just east of Spitz Stadium. Parking is available via 6 Ave. S. at 25 Street S.
-      </p>
-      <p>
-        LTC has 6 tennis courts, coaching for all levels, and social events. Everyone is welcome, from beginners to experienced players.
-      </p>
-      <p>
-        Come play tennis or join our community events.
-      </p>
-    </div>
-    <div class="flex-col right-col">
-      <img class="responsive" src="images/mainpic.jpg" alt="Club Photo" />
-    </div>
-  </section>
+<section class="container flex-row">
+  <!-- Left Column: Description + Quick Links -->
+  <div class="flex-col left-col">
+<h2>Welcome to Lethbridge Tennis Club!</h2>
 
-  <section class="container flex-row" style="padding-bottom: 4rem;">
-    <div class="flex-col" style="flex: 1;">
-      <h3>Quick Links</h3>
+<!-- Centered image under the heading -->
+<img src="images/mainpic.jpg" alt="Club Photo" class="centered-img" />
+<section class="container flex-row" style="padding: 0rem 0rem; text-align: justify;">
+  <p>
+  The Lethbridge Tennis Club (LTC), established in 1887, is Alberta’s longest-running tennis club. Located at 2611 Parkside Drive South near 
+  Spitz Stadium, LTC offers six tennis courts, a ball machine, viewing deck, night lights, clubhouse, washrooms, kitchen, and BBQ area - 
+  perfect for lessons, social events, and play. Everyone, from beginners to seasoned players, is welcome to join and be part of the LTC family!
+  </p>
+</section>
+
+
+
+    <!-- Quick Links inside same box -->
+    <div style="margin-top: 0rem;">
+      <h4>Quick Links</h4>
       <a href="eventcalendar.html" class="button">Event Calendar</a><br />
       <a href="tournaments.html" class="button">Tournaments</a>
     </div>
-    <div class="flex-col" style="flex: 2;">
-      <h3>Club Blog</h3>
-      <div id="blog-container">
-        <p>Loading posts...</p>
-      </div>
+  </div>
+
+  <!-- Right Column: Blog -->
+  <div class="flex-col right-col">
+    <h3 style="text-align: center;">Club Blog</h3>
+    <div id="blog-container">
+      <p>Loading posts...</p>
     </div>
-  </section>
+  </div>
+</section>
+
+
+
+
 
 <footer>
   <div class="footer-container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 3px solid #14532d;">
@@ -174,10 +160,18 @@
       </iframe>
     </div>
   </div>
+    <div style="text-align: center; padding: 1rem 0; font-size: 0.9rem; color: #a5d6a7; border-top: 1px solid #14532d;">
+    © <span id="current-year"></span> Lethbridge Tennis Club
+  </div>
 </footer>
 
 
+ <!-- SCRIPTS -->
 
+  <!-- Footer Year -->
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
 
 
   <!-- Firebase SDKs -->
