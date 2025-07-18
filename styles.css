@@ -1,5 +1,7 @@
 /* Общие базовые стили */
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
 
 
 /* === ADMIN PAGE === */
@@ -25,6 +27,10 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
 }
 
 .flex-row {
@@ -215,6 +221,9 @@ header .logo-container img {
 nav {
   position: relative;
 }
+    nav, nav * {
+      font-family: 'Lora', serif;
+    }
 
 /* Navigation Links */
 nav a.nav-link {
