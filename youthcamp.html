@@ -7,32 +7,61 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Специфичные стили для страницы лагеря */
-    .sessions-highlight {
-      background-color: #eef4eb;
-      border: 3px solid #14532d;
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
-      box-shadow: 0 4px 15px rgba(20, 83, 45, 0.25);
-      margin-bottom: 2rem;
-      color: #14532d;
-    }
+/* Camp session and details aligned side by side */
+.camp-sections-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem 0;
+}
 
-    a.link-button {
-      display: inline-block;
-      background-color: #14532d;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-      margin-top: 1rem;
-    }
+.camp-sessions,
+.camp-details {
+  flex: 1 1 300px;
+  border: 1px solid #14532d;
+  padding: 1.5rem;
+  font-family: 'Roboto Slab', serif;
+  color: #14532d;
+}
 
-    a.link-button:hover {
-      background-color: #0b3d1a;
-    }
+.camp-sessions h2,
+.camp-details h2 {
+  margin-bottom: 1rem;
+}
+
+/* Highlighted registration box */
+.sessions-highlight {
+  border: 1px dashed #14532d;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  font-family: 'Roboto Slab', serif;
+  color: #14532d;
+}
+
+/* Back button */
+a.link-button {
+  display: inline-block;
+  background-color: #14532d;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+a.link-button:hover {
+  background-color: #0b3d1a;
+}
+
+/* Email link inside highlighted box */
+.sessions-highlight a {
+  color: #14532d;
+  text-decoration: underline;
+}
+
   </style>
 </head>
 <body>
@@ -76,49 +105,52 @@
 
   </header>
 
-  <main class="container">
-    <h1>Youth Summer Camp 2025</h1>
+ <main class="container">
+  <h1>Youth Summer Camp 2025</h1>
 
-    <p>Our Youth Camp is designed for kids ages 5 to 12 who want to have fun and improve their tennis skills this summer. Led by Yana, a Tennis Canada-certified instructor, campers will enjoy games, skill-building exercises, and plenty of tennis activities in a supportive environment.</p>
+  <p>Our Youth Camp is designed for kids ages 5 to 12 who want to have fun and improve their tennis skills this summer. Led by Yana, a Tennis Canada-certified instructor, campers will enjoy games, skill-building exercises, and plenty of tennis activities in a supportive environment.</p>
 
-    <section class="sessions-highlight">
+  <section class="camp-sections-row">
+    <div class="camp-sessions">
       <h2>Camp Sessions</h2>
       <ol>
-        <li>July 7-11 (Mon-Fri) — SOLD OUT</li>
-        <li>July 14-18 (Mon-Fri)</li>
-        <li>July 21-25 (Mon-Fri)</li>
-        <li>July 28-August 1 (Mon-Fri)</li>
-        <li>August 5-8 (Tue-Fri)</li>
-        <li>August 11-15 (Mon-Fri)</li>
+        <li>July 7–11 (Mon–Fri) — <strong>SOLD OUT</strong></li>
+        <li>July 14–18 (Mon–Fri)</li>
+        <li>July 21–25 (Mon–Fri)</li>
+        <li>July 28–August 1 (Mon–Fri)</li>
+        <li>August 5–8 (Tue–Fri)</li>
+        <li>August 11–15 (Mon–Fri)</li>
       </ol>
-    </section>
+    </div>
 
-    <section>
+    <div class="camp-details">
       <h2>Camp Details</h2>
       <ul>
         <li><strong>Coach:</strong> Yana (Tennis Canada-certified instructor)</li>
-        <li><strong>Age groups:</strong> 5-8 and 9-12 years old</li>
+        <li><strong>Age groups:</strong> 5–8 and 9–12 years old</li>
         <li><strong>Schedule:</strong> Camps run Monday to Friday, 9 a.m. – Noon</li>
         <li>Camps run subject to interest (minimum 6 participants)</li>
         <li>Please bring snacks and a water bottle</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <section class="sessions-highlight">
-      <h2>Fees &amp; Registration</h2>
-      <p>$85 per week per child (4-day week Aug 5-8: $68)</p>
-      <p>Camp fees can be paid by e-transfer directed to the club email address: <a href="mailto:lethtennisclub@gmail.com" style="color:#14532d; text-decoration:underline;">lethtennisclub@gmail.com</a></p>
-      <p><strong>Please include in your e-transfer notice:</strong></p>
-      <ol>
-        <li>Dates of session requested</li>
-        <li>Name of each player being registered</li>
-        <li>Email address for each player registered</li>
-        <li>Parent/Guardian cell number for each player registered</li>
-      </ol>
-    </section>
+  <section class="sessions-highlight">
+    <h2>Fees &amp; Registration</h2>
+    <p>$85 per week per child (4-day week Aug 5–8: $68)</p>
+    <p>Camp fees can be paid by e-transfer directed to the club email address: <a href="mailto:lethtennisclub@gmail.com">lethtennisclub@gmail.com</a></p>
+    <p><strong>Please include in your e-transfer notice:</strong></p>
+    <ol>
+      <li>Dates of session requested</li>
+      <li>Name of each player being registered</li>
+      <li>Email address for each player registered</li>
+      <li>Parent/Guardian cell number for each player registered</li>
+    </ol>
+  </section>
 
-    <a href="programs.html" class="link-button">Back to Programs</a>
-  </main>
+  <a href="programs.html" class="link-button">Back to Programs</a>
+</main>
+
 
 <footer>
   <div class="footer-container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 3px solid #14532d;">
@@ -150,8 +182,17 @@
       </iframe>
     </div>
   </div>
+    <div style="text-align: center; padding: 1rem 0; font-size: 0.9rem; color: #a5d6a7; border-top: 1px solid #14532d;">
+    © <span id="current-year"></span> Lethbridge Tennis Club
+  </div>
 </footer>
 
 
+ <!-- SCRIPTS -->
+
+  <!-- Footer Year -->
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
