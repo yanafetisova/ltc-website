@@ -6,34 +6,151 @@
   <title>Event Calendar | LTC Tennis Club</title>
   <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+ <!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
 
-    <style>
-    /* Стили для календаря в зеленых тонах */
-    main.container {
-      padding: 1rem 0;
-      display: flex;
-      justify-content: center;
-      background-color: #e6f0d9; /* мягкий зеленый фон */
-      border: 3px solid #14532d; /* темно-зеленая рамка вокруг календаря */
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(20, 83, 45, 0.4);
-      max-width: 920px;
-      margin: 2rem auto;
-    }
+  <style>.main-content {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: #14532d;
+}
 
-    main.container iframe {
-      width: 900px !important;  /* чтобы не ломать ширину */
-      height: 700px !important;
-      border-radius: 5px;
-      border: none !important;
-      box-shadow: 0 8px 20px rgba(20, 83, 45, 0.3);
-      transition: box-shadow 0.3s ease;
-    }
+.content-wrapper {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
 
-    main.container iframe:hover {
-      box-shadow: 0 12px 28px rgba(20, 83, 45, 0.5);
-    }
-  </style>
+.weekly-events {
+  flex-grow: 1;
+  max-width: 250px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.weekly-events ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.weekly-events li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #14532d33;
+  font-weight: 500;
+}
+
+.weekly-events li strong {
+  color: #2a6b2f;
+}
+
+#calendar {
+  width: 850px;
+  min-height: 650px;
+  background-color: #f0fdf4;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(20, 83, 45, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  #calendar,
+  .weekly-events {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Кнопки календаря зелёные */
+.fc .fc-button {
+  background-color: #0b3d1a !important; /* насыщенный зелёный */
+  border: none !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  text-transform: none !important; /* убрать капс */
+  font-weight: 600;
+}
+
+/* При наведении */
+.fc .fc-button:hover,
+.fc .fc-button:focus {
+  background-color: #0d351d !important; /* более тёмный зелёный */
+  outline: none !important;
+}
+
+/* Активная кнопка */
+.fc .fc-button:active,
+.fc .fc-button.fc-button-active {
+  background-color: #0f3e23 !important; /* ещё темнее */
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+  color: #dbe7cf !important;
+}
+
+/* Стили для события — время сверху, название под ним */
+.fc-event-main-frame {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px;
+  padding: 2px 4px !important;
+}
+
+/* Название события */
+.fc-event-title {
+  order: 1;
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: normal !important;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-height: 3em;
+  overflow: hidden;
+}
+
+/* Контейнер события */
+.fc-event-main {
+  overflow: hidden !important;
+  max-height: 4.5em;
+}
+
+/* Контейнер события */
+.fc-event {
+  padding: 4px 6px !important;
+  max-height: none !important;  /* Убираем ограничение высоты */
+  overflow: visible !important; /* Чтобы текст не обрезался */
+  white-space: normal !important; /* Чтобы текст переносился */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+/* Время */
+.fc-event-time {
+  font-weight: 600;
+  font-size: 0.7rem;
+  color: #0b3d1a;
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+
+/* Название события */
+.fc-event-title {
+  font-weight: 400;
+  font-size: 0.75rem;
+  white-space: normal !important;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  width: 100%;
+}
+
+</style>
   
 </head>
 <body>
@@ -41,7 +158,7 @@
   <header>
     <div class="header-inner">
       <div class="logo-container">
-        <img src="images/logo.png" alt="Club Logo" />
+        <a href="index.html"><img src="images/logo.png" alt="Club Logo" /></a>
       </div>
 <nav>
   <a href="index.html" class="nav-link">Home</a>
@@ -78,40 +195,44 @@
 
     </div>
   </header>
-  <h1 class="page-title">Event Calendar</h1>
-  <!-- Карточки с событиями -->
-  
-  <section class="weekly-events">
-    <div class="event-card">
-      <h3>Monday</h3>
-      <h4>Team Tennis</h4>
-      <p>6-9 p.m. Monday nights from May to August.<br>All levels are welcome.<br>To register, email: <a href="mailto:lethtennisclub@gmail.com">lethtennisclub@gmail.com</a></p>
-    </div>
-    <div class="event-card">
-      <h3>Tuesday</h3>
-      <h4>Men’s Night</h4>
-      <p>All skill levels are welcome.<br>Every Tuesday 6-9 p.m. from May to September.</p>
-    </div>
-    <div class="event-card">
-      <h3>Wednesday</h3>
-      <h4>Women’s Night</h4>
-      <p>All skill levels are welcome.<br>Every Wednesday 6-9 p.m. from May to September.</p>
-    </div>
-    <div class="event-card">
-      <h3>Saturday</h3>
-      <h4>Social Tennis</h4>
-      <p>Meet fellow club members and play a set or two.<br>Every Saturday 1-3 p.m. from May to September (weather permitting).</p>
-    </div>
-  </section>
 
-<main class="container" style="padding: 1rem 0;">
- 
-  <!-- Календарь -->
-  <div style="display: flex; justify-content: center;">
-    <iframe src="https://calendar.google.com/calendar/embed?src=93a9ad28432c6fadc89f3bc4619037740a32521cd7b1a8adc3597072f754c358%40group.calendar.google.com&ctz=America%2FEdmonton" style="border: 0; width: 900px; height: 700px; border-radius: 8px;" frameborder="0" scrolling="no" title="LTC Event Calendar"></iframe>
+<main class="main-content">
+  <h1>Event Calendar</h1>
+  
+  <div class="content-wrapper">
+    <nav class="weekly-events">
+      <ul>
+        <li>
+          <strong>Monday</strong><br />
+          Team Tennis<br />
+          6–9 p.m. Monday nights from May to August.<br />
+          All levels are welcome.<br />
+          To register, email: <a href="mailto:lethtennisclub@gmail.com">lethtennisclub@gmail.com</a>
+        </li>
+        <li>
+          <strong>Tuesday</strong><br />
+          Men’s Night<br />
+          All skill levels are welcome.<br />
+          Every Tuesday 6–9 p.m. from May to September.
+        </li>
+        <li>
+          <strong>Wednesday</strong><br />
+          Women’s Night<br />
+          All skill levels are welcome.<br />
+          Every Wednesday 6–9 p.m. from May to September.
+        </li>
+        <li>
+          <strong>Saturday</strong><br />
+          Social Tennis<br />
+          Meet fellow club members and play a set or two.<br />
+          Every Saturday 1–3 p.m. from May to September (weather permitting).
+        </li>
+      </ul>
+    </nav>
+    
+    <section id="calendar"></section>
   </div>
 </main>
-
 
 <footer>
   <div class="footer-container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 3px solid #14532d;">
@@ -155,6 +276,12 @@
   document.getElementById('current-year').textContent = new Date().getFullYear();
 </script>
 
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
 
+
+<script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
 </body>
 </html>

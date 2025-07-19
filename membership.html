@@ -4,13 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Membership | LTC Tennis Club</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-
 </head>
-<body>
 
+<body>
   <header>
     <div class="logo-container">
       <a href="index.html"><img src="images/logo.png" alt="Club Logo" /></a>
@@ -47,12 +44,12 @@
     </div>
   </div>
 </nav>
-
   </header>
+
 
 <main class="container membership-layout">
   <section class="membership-price">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 1rem;">Memberships <span id="year"></span></h2>
+<h1>Memberships <span id="header-year"></span></h1>
     <div class="table-wrapper">
       <table class="membership-table" aria-label="Membership prices">
         <thead>
@@ -124,7 +121,7 @@
     </div>
   </div>
     <div style="text-align: center; padding: 1rem 0; font-size: 0.9rem; color: #a5d6a7; border-top: 1px solid #14532d;">
-    © <span id="current-year"></span> Lethbridge Tennis Club
+    © <span id="footer-year"></span> Lethbridge Tennis Club
   </div>
 </footer>
 
@@ -133,7 +130,8 @@
 
   <!-- Footer Year -->
 <script>
-  document.getElementById('current-year').textContent = new Date().getFullYear();
+  document.getElementById('header-year').textContent = new Date().getFullYear();
+document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>

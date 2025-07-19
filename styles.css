@@ -1,8 +1,5 @@
 /* Общие базовые стили */
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
-
-
 
 /* === ADMIN PAGE === */
 .admin-forms-container {
@@ -21,16 +18,12 @@
 
 /* === GENERAL (ALL PAGES) === */
 body {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Lora', serif;
   background-color: white;
   color: #133d14;
   margin: 0;
   padding: 0;
   line-height: 1.5;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lora', serif;
 }
 
 .flex-row {
@@ -370,7 +363,6 @@ p.intro {
   padding: 1.5rem;
   max-height: 400px;
   overflow-y: auto;
-  font-family: 'Roboto Slab', serif;
   color: #2f4f2f;
 }
 
@@ -438,15 +430,6 @@ p.intro {
   flex-direction: column;
   justify-content: flex-start;
   color: #1a3924;
-  font-family: 'Roboto Slab', serif;
-}
-
-/* Заголовок */
-.membership-price h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #14532d;
 }
 
 /* Таблица */
@@ -535,11 +518,6 @@ p.intro {
   border-bottom: 2px solid #14532d;
   padding-bottom: 0.3rem;
   text-align: center;
-}
-
-.program-list {
-  font-family: 'Roboto Slab', serif;
-  color: #14532d;
 }
 
 .program-item {
@@ -676,69 +654,6 @@ hr {
 }
 
 /* === END OF PROGRAMS PAGE === */
-
-
-/* === EVENT CALENDAR PAGE === */
-.weekly-events {
-  max-width: 920px; /* равна ширине календаря + отступы */
-  margin: 2rem auto 1rem auto; /* центрируем и добавляем отступ сверху и снизу */
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  padding: 0 1rem; /* немного внутреннего отступа */
-}
-
-.event-card {
-  background-color: #f3f8f3;
-  border: 2px solid #14532d;
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
-  color: #14532d;
-  font-family: 'Lora', serif;
-  box-sizing: border-box;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.event-card h3 {
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin: 0 0 0.25rem 0;
-}
-
-.event-card h4 {
-  font-weight: 600;
-  color: #2a6b2f;
-  margin: 0 0 0.5rem 0;
-}
-
-.event-card p {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin: 0;
-}
-
-.event-card a {
-  color: #14532d;
-  text-decoration: underline;
-}
-
-/* Адаптив */
-@media (max-width: 1024px) {
-  .weekly-events {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .weekly-events {
-    grid-template-columns: 1fr;
-  }
-}
-/* === END OF EVENT CALENDAR PAGE === */
 
 
 /* === TOURNAMENTS PAGE === */
