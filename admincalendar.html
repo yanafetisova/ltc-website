@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Calendar Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'EB Garamond', serif;
+      background-color: #f0fdf4;
+      color: #14532d;
+      padding: 2rem;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #1c4532;
+    }
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      box-shadow: 0 0 10px rgba(20, 83, 45, 0.1);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .repeat-days {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+    .repeat-days label {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-weight: normal;
+    }
+    button {
+      background-color: #15803d;
+      color: white;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #166534;
+    }
+    .events-list {
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+    }
+    details {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 2rem;
+      box-shadow: 0 0 10px rgba(20, 83, 45, 0.1);
+      margin-bottom: 1rem;
+    }
+    summary {
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      color: #14532d;
+      margin-bottom: 1rem;
+      outline-offset: 4px;
+    }
+    .event-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid #ccc;
+    }
+    .event-item:last-child {
+      border-bottom: none;
+    }
+    .event-item button {
+      background-color: #b91c1c;
+      margin-top: 0.5rem;
+      border: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .event-item button:hover {
+      background-color: #7f1d1d;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Admin Calendar Panel</h1>
+
+  <form id="event-form">
+    <label for="title">Event Title:</label>
+    <input type="text" id="title" required />
+
+    <label for="hourStart">Start Hour:</label>
+    <select id="hourStart"></select>
+
+    <label for="minuteStart">Start Minute:</label>
+    <select id="minuteStart"></select>
+
+    <label for="hourEnd">End Hour:</label>
+    <select id="hourEnd"></select>
+
+    <label for="minuteEnd">End Minute:</label>
+    <select id="minuteEnd"></select>
+
+    <label for="recurrence">Repeat Weekly?</label>
+    <select id="recurrence">
+      <option value="none">No</option>
+      <option value="weekly">Yes</option>
+    </select>
+
+    <div id="repeat-options" style="display: none;">
+      <label>Days of Week:</label>
+      <div class="repeat-days">
+        <label><input type="checkbox" value="0" class="repeat-day" /> Sun</label>
+        <label><input type="checkbox" value="1" class="repeat-day" /> Mon</label>
+        <label><input type="checkbox" value="2" class="repeat-day" /> Tue</label>
+        <label><input type="checkbox" value="3" class="repeat-day" /> Wed</label>
+        <label><input type="checkbox" value="4" class="repeat-day" /> Thu</label>
+        <label><input type="checkbox" value="5" class="repeat-day" /> Fri</label>
+        <label><input type="checkbox" value="6" class="repeat-day" /> Sat</label>
+      </div>
+
+      <label for="repeat-start">Repeat Start Date:</label>
+      <input type="date" id="repeat-start" />
+
+      <label for="repeat-end">Repeat End Date:</label>
+      <input type="date" id="repeat-end" />
+    </div>
+
+    <label for="date">Single Date (if not repeating):</label>
+    <input type="date" id="date" />
+
+    <button type="submit">Add Event</button>
+  </form>
+
+  <section class="events-list">
+    <details id="upcoming-events">
+      <summary>Upcoming Events</summary>
+      <div id="upcoming-container"></div>
+    </details>
+
+    <details id="past-events">
+      <summary>Past Events</summary>
+      <div id="past-container"></div>
+    </details>
+  </section>
+
+  <button id="delete-all" style="background-color:#b91c1c;color:white;border:none;padding:0.75rem 1.5rem;border-radius:6px;cursor:pointer;margin:0 auto;display:block;">Delete All Events</button>
+
+  <script>
+    // Наполнение селектов для часов и минут
+    const hourSelects = ["hourStart", "hourEnd"];
+    const minuteSelects = ["minuteStart", "minuteEnd"];
+
+    hourSelects.forEach(id => {
+      const select = document.getElementById(id);
+      for (let h = 6; h <= 21; h++) {
+        const option = document.createElement("option");
+        option.value = option.textContent = h.toString().padStart(2, '0');
+        select.appendChild(option);
+      }
+    });
+
+    minuteSelects.forEach(id => {
+      const select = document.getElementById(id);
+      ["00", "30"].forEach(m => {
+        const option = document.createElement("option");
+        option.value = option.textContent = m;
+        select.appendChild(option);
+      });
+    });
+
+    document.getElementById("recurrence").addEventListener("change", function () {
+      document.getElementById("repeat-options").style.display = this.value === "weekly" ? "block" : "none";
+    });
+  </script>
+
+  <script type="module" src="adminscript.js"></script>
+
+</body>
+</html>
