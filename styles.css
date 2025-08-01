@@ -214,9 +214,9 @@ header .logo-container img {
 nav {
   position: relative;
 }
-    nav, nav * {
-      font-family: 'Lora', serif;
-    }
+nav, nav * {
+  font-family: 'Lora', serif;
+}
 
 /* Navigation Links */
 nav a.nav-link {
@@ -277,8 +277,9 @@ nav a.nav-link:hover {
   left: 0;
 }
 
-/* Show dropdown menu on hover */
-.dropdown:hover .dropdown-menu {
+/* Show dropdown menu on hover of dropdown container or menu */
+.dropdown:hover > .dropdown-menu,
+.dropdown-menu:hover {
   display: block;
 }
 
@@ -316,6 +317,74 @@ nav a.nav-link:hover {
   background-color: #f5f9e3;
   border-radius: 50%;
 }
+
+/* Вложенное подменю (второй уровень) */
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%; /* Смещаем вправо от родительского меню */
+  border-radius: 8px;
+  border: 1px solid #14532d;
+  background-color: #0b3d1a;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  display: none;
+  z-index: 20;
+}
+
+/* Показываем вложенное меню при наведении на родительский пункт */
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+/* Стрелка вправо для вложенного меню */
+.dropdown-submenu > a.dropdown-toggle::after {
+  content: "";
+  border: solid #dbe7cf;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-left: auto;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+/* Чтобы вложенные пункты выглядели как обычные dropdown-item */
+.dropdown-submenu > a.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  color: #dbe7cf;
+  padding: 0.5rem 1rem 0.5rem 1.5rem;
+  text-decoration: none !important;
+  cursor: pointer;
+  font-weight: 400;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-submenu > a.dropdown-toggle:hover {
+  background-color: #14532d;
+  color: #f5f9e3;
+}
+
+/* Псевдоэлемент bullet point при наведении (как у основного меню) */
+.dropdown-submenu > a.dropdown-toggle:hover::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #f5f9e3;
+  border-radius: 50%;
+}
+
+
 
 
 /* Titles */
@@ -682,20 +751,19 @@ hr {
 
 
 /* === ABOUT US PAGE === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* FACILITY SECTION */
 .facility-row {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
   margin-bottom: 3rem;
   flex-wrap: wrap;
-}
-
-.facility-image {
-  flex: 1 1 300px;
-  max-width: 300px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
-  object-fit: cover;
 }
 
 .facility-text {
@@ -705,46 +773,43 @@ hr {
   line-height: 1.5;
 }
 
+/* BOARD SECTION */
 .board-row {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
   margin-bottom: 3rem;
-  flex-wrap: nowrap; /* запретить перенос */
+  flex-wrap: nowrap; /* prevent wrapping on desktop */
 }
 
 .board-list {
-  flex: 0 0 60%; /* фиксировать ширину около 60% */
+  flex: 0 0 60%;
   font-size: 1.1rem;
   color: #14532d;
 }
 
 .board-image {
-  flex: 0 0 35%; /* фиксировать ширину около 35% */
+  flex: 0 0 35%;
   max-width: 300px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(20, 83, 45, 0.15);
   object-fit: cover;
 }
 
-/* Адаптив */
+/* === Responsive Design === */
 @media (max-width: 768px) {
+  .facility-row,
   .board-row {
-    flex-wrap: wrap; /* на мобильных разрешить перенос */
-  }
-  .board-list, .board-image {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-}
-@media (max-width: 768px) {
-  .facility-row, .board-row {
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
   }
-  .facility-image, .board-image, .facility-text, .board-list {
-    max-width: 100%;
+
+  .board-image,
+  .facility-text,
+  .board-list {
     flex: unset;
+    max-width: 100%;
   }
 }
 /* === END OF ABOUT US PAGE === */
@@ -834,3 +899,38 @@ hr {
   background-color: #0b3d1a;
 }
 /* === END OF CONTACT US PAGE === */
+
+/* === GUIDELINES PAGE === */
+.guidelines-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.guidelines-nav a {
+  color: #14532d;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.guidelines-nav a::after {
+  content: '';
+  display: block;
+  width: 0%;
+  height: 2px;
+  background-color: #14532d;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+.guidelines-nav a:hover::after {
+  width: 100%;
+}
+
+/* === END OF GUIDELINES PAGE === */
